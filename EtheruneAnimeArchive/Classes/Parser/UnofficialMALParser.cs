@@ -39,64 +39,23 @@ namespace EtheruneAnimeArchive.Classes.Parser
             {
                 Anime anime = new Anime();
 
-                anime.Title = animeNode["title"].InnerText;
-                anime.Synopsis = animeNode["synopsis"].InnerText;
-                anime.Type = GetAnimeType(animeNode["type"].InnerText);
-                anime.ImageUrl = animeNode["image_url"].InnerText;
-                anime.AirStatus = GetAirStatus(animeNode["status"].InnerText);
-                anime.Classification = animeNode["classification"].InnerText;
+                anime.MyAnimeListId = XMLHelper.IntValue(animeNode["id"]);
+                anime.Title = XMLHelper.StringValue(animeNode["title"]);
+                anime.TitleEnglish = XMLHelper.StringValue(animeNode["english_title"]);
+                anime.TitleJapanese = XMLHelper.StringValue(animeNode["japanese_title"]);
+                anime.Synopsis = XMLHelper.StringValue(animeNode["synopsis"]);
+                anime.Type = GetAnimeType(XMLHelper.StringValue(animeNode["type"]));
+                anime.ImageUrl = XMLHelper.StringValue(animeNode["image_url"]);
+                anime.AirStatus = GetAirStatus(XMLHelper.StringValue(animeNode["status"]));
+                anime.Classification = XMLHelper.StringValue(animeNode["classification"]);
+                anime.Episodes = XMLHelper.IntValue(animeNode["episodes"]);
+                anime.Rank = XMLHelper.IntValue(animeNode["rank"]);
+                anime.PopularityRank = XMLHelper.IntValue(animeNode["popularity_rank"]);
+                anime.MembersScore = XMLHelper.FloatValue(animeNode["members_score"]);
+                anime.MembersCount = XMLHelper.IntValue(animeNode["members_count"]);
+                anime.FavoritedCount = XMLHelper.IntValue(animeNode["favorited_count"]);
 
-                try
-                {
-                    anime.TitleEnglish = animeNode["english_title"].InnerText;
-                }
-                catch
-                {
-                    anime.TitleEnglish = "";
-                }
-
-                try
-                {
-                    anime.TitleJapanese = animeNode["japanese_title"].InnerText;
-                }
-                catch
-                {
-                    anime.TitleJapanese = "";
-                }
-                
-
-                //anime.MyAnimeListId = Int32.Parse(animeNode["id"].InnerText);
-                //anime.Episodes = Int32.Parse(animeNode["episodes"].InnerText);
-                //anime.Rank = Int32.Parse(animeNode["rank"].InnerText);
-                //anime.PopularityRank = Int32.Parse(animeNode["popularity_rank"].InnerText);
-                //anime.MembersScore = float.Parse(animeNode["members_score"].InnerText);
-                //anime.MembersCount = Int32.Parse(animeNode["members_count"].InnerText);
-                //anime.FavoritedCount = Int32.Parse(animeNode["favorited_count"].InnerText);
-
-                // Parse numerical types
-                int malId = 0;
-                int episodes = 0;
-                int rank = 0;
-                int popularityRank = 0;
-                int memberScore = 0;
-                int memberCount = 0;
-                int favoritedCount = 0;
-
-                int.TryParse(animeNode["id"].InnerText,out malId);
-                int.TryParse(animeNode["episodes"].InnerText, out episodes);
-                int.TryParse(animeNode["rank"].InnerText, out rank);
-                int.TryParse(animeNode["popularity_rank"].InnerText, out popularityRank);
-                int.TryParse(animeNode["members_score"].InnerText, out memberScore);
-                int.TryParse(animeNode["members_count"].InnerText, out memberCount);
-                int.TryParse(animeNode["favorited_count"].InnerText, out favoritedCount);
-
-                anime.MyAnimeListId = malId;
-                anime.Episodes = episodes;
-                anime.Rank = rank;
-                anime.PopularityRank = popularityRank;
-                anime.MembersScore = memberScore;
-                anime.MembersCount = memberCount;
-                anime.FavoritedCount = favoritedCount;
+                // TODO - Air Date
 
                 // Get genre
                 XmlNodeList genreList = animeNode.SelectNodes("//genre");
@@ -112,19 +71,14 @@ namespace EtheruneAnimeArchive.Classes.Parser
                     anime.Genres.Add(tagNode.InnerText);
                 }
 
+                // Get related anime (TODO)
+
                 // Build User's Watch Status
                 UserAnimeStatus userStatus = new UserAnimeStatus();
-                userStatus.Status = GetWatchStatus(animeNode["watched_status"].InnerText);
-                int userScore = 0;
-                int userEpisode = 0;
-                int.TryParse(animeNode["score"].InnerText, out userScore);
-                int.TryParse(animeNode["watched_episodes"].InnerText, out userEpisode);
-                userStatus.Score = userScore;
-                userStatus.Episode = userEpisode;
-
-
+                userStatus.Status = GetWatchStatus(XMLHelper.StringValue(animeNode["watched_status"]));
+                userStatus.Score = XMLHelper.IntValue(animeNode["score"]);
+                userStatus.Episode = XMLHelper.IntValue(animeNode["watched_episodes"]);
                 anime.UserStatus = userStatus;
- 
 
                 return anime;
             }
