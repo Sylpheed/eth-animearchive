@@ -6,7 +6,7 @@ using System.Xml;
 
 namespace EtheruneAnimeArchive.Classes.Parser
 {
-    class XMLHelper
+    static class XMLHelper
     {
         public static int IntValue(XmlNode node)
         {
@@ -19,7 +19,7 @@ namespace EtheruneAnimeArchive.Classes.Parser
             }
             else
             {
-                Console.WriteLine("Accessing null XML Node!");
+                //Console.WriteLine("Accessing null XML Node!");
                 return 0;
             }
         }
@@ -35,7 +35,7 @@ namespace EtheruneAnimeArchive.Classes.Parser
             }
             else
             {
-                Console.WriteLine("Accessing null XML Node!");
+                //Console.WriteLine("Accessing null XML Node!");
                 return 0;
             }
         }
@@ -48,7 +48,7 @@ namespace EtheruneAnimeArchive.Classes.Parser
             }
             else
             {
-                Console.WriteLine("Accessing null XML Node!");
+                //Console.WriteLine("Accessing null XML Node!");
                 return null;
             }
         }
