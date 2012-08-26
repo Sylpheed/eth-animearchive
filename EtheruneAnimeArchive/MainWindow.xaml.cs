@@ -26,12 +26,6 @@ namespace EtheruneAnimeArchive
         public MainWindow()
         {
             InitializeComponent();
-
-            IAnimeXMLParser parser = new UnofficialMALParser();
-
-            XmlDocument xml = new XmlDocument();
-            xml.Load("C:\\Users\\Sylpheed\\Downloads\\Sylpheed.xml");
-            List<Anime> animeList = parser.GetAnimeList(xml);
         }
     }
 }

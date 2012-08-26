@@ -9,6 +9,11 @@ namespace EtheruneAnimeArchive.Classes.Models
     {
         protected List<Anime> animeList;
 
+        public AnimeList()
+        {
+            animeList = new List<Anime>();
+        }
+
         #region Fetch Methods
         public bool HasAnime(int myAnimeListId)
         {

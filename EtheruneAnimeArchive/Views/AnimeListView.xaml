@@ -1,0 +1,39 @@
+﻿<UserControl
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" x:Name="AnimeListGrid"
+	mc:Ignorable="d"
+	xmlns:local="clr-namespace:EtheruneAnimeArchive"
+	x:Class="EtheruneAnimeArchive.AnimeListView"
+	d:DesignWidth="640" d:DesignHeight="480" DataContext="{DynamicResource AnimeListViewModelDataSource}">
+	<UserControl.Resources>
+		<local:AnimeListViewModel x:Key="AnimeListViewModelDataSource" />
+	</UserControl.Resources>
+
+	<Grid x:Name="LayoutRoot">
+	<TabControl Margin="8">
+			<TabItem Header="Watching"/>
+			<TabItem Header="Completed">
+				<Grid Background="#FFE5E5E5"/>
+			</TabItem>
+			<TabItem Header="On-Hold">
+				<Grid Background="#FFE5E5E5"/>
+			</TabItem>
+			<TabItem Header="Dropped">
+				<Grid Background="#FFE5E5E5"/>
+			</TabItem>
+			<TabItem Header="Plan to Watch">
+				<Grid Background="#FFE5E5E5"/>
+			</TabItem>
+		</TabControl>
+		<DataGrid RenderTransformOrigin="2.333,2.692" AutoGenerateColumns="False" Margin="8,30.666,8,8" ItemsSource="{Binding AnimeList}" GridLinesVisibility="None" HeadersVisibility="Column" AlternationCount="2" CanUserAddRows="False" CanUserDeleteRows="False" AlternatingRowBackground="#0C234781" SelectionMode="Single">
+			<DataGrid.Columns>
+				<DataGridTextColumn Header="Title" IsReadOnly="True" Binding="{Binding Title}" Width="*"/>
+				<DataGridTextColumn Header="Score" IsReadOnly="True" Binding="{Binding MembersScore}"/>
+				<DataGridTextColumn Header="Progress" IsReadOnly="True" Binding="{Binding UserStatus.Episode}"/>
+				<DataGridTextColumn Header="Season" IsReadOnly="True"/>
+			</DataGrid.Columns>
+		</DataGrid>
+	</Grid>
+</UserControl>

@@ -25,7 +25,7 @@ namespace EtheruneAnimeArchive.Classes.Models
         #endregion // NotYetImplemented
     }
 
-    enum WatchStatus : byte
+    public enum WatchStatus : byte
     {
         Empty,
         Watching,
